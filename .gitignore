@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### JSON and Images ###
+Quote.json
+QuoteSample.json
+Miniproject_overview.jpg

@@ -1,0 +1,45 @@
+body  {
+    background-image: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1746&q=80");
+  }          
+
+  blockquote {
+    border-left:none
+}
+
+.quote-badge {
+    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.2);   
+}
+
+.quote-box {
+    
+    overflow: hidden;
+    margin-top: 50px;
+    padding-top: -25px;
+    border-radius: 17px;
+    background-color: #4ADFCC;
+    color: white;
+    width: 325px;
+    box-shadow: 2px 2px 2px 2px #E0E0E0;
+    
+}
+
+.quotation-mark {
+    
+    margin-top: 10px;
+    font-weight: bold;
+    font-size:100px;
+    color: white;
+    font-family: "Times New Roman", Times, Serif;
+    
+}
+
+.quote-text {
+    
+    font-size: 19px;
+    margin-top: -50px;
+}
+
+.blog-post-bottom pull-right {
+  
+}

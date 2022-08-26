@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote</title>
+</head>
+<body style = "background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1746&q=80');">
+
+    <form 
+    action = "#"
+    th:action = "@{/contact}"
+    th:object = "${contact}"
+    method = "post">
+
+    <p>
+        <label for="Date">Date: </label>
+        <input type="date" id="start" name="date">
+    </p>
+
+    <p>
+        Quote: <input type="text" id="message" value="Life is not always a matter of holding good cards, but sometimes, playing a poor hand well.">
+    </p>
+</body>
+</html>
