@@ -1,32 +1,47 @@
 package vttp.ssf.motivationquote.miniproject2.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import vttp.ssf.motivationquote.miniproject2.model.Quote;
+import vttp.ssf.motivationquote.miniproject2.redis.RedisService;
 
 @Service
 public class QuoteService {
+
     private static final Logger logger = LoggerFactory.getLogger(QuoteService.class);
     
     private static String URL = "https://zenquotes.io/api/quotes";
 
-    public Optional<Quote> getQuote (){
+    public Optional<List<Quote>> getQuote (){
         
         RestTemplate template = new RestTemplate();
         ResponseEntity<String> resp = null;
         
         String quoteUrl = URL;
 
+        List<Quote> quoteList; 
+
+        logger.info("Trying to receive the json******************************");
+
         try{
             resp = template.getForEntity(quoteUrl, String.class);
-            Quote w = Quote.create(resp.getBody());
-            return Optional.of(w);
+            logger.info("resp received******************************");
+            //logger.info(resp.getBody());
+
+
+            quoteList= Quote.createList(resp.getBody());
+
+            
+
+            return Optional.of(quoteList);
             
         }catch(Exception e){
             logger.error(e.getMessage());

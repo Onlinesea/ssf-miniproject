@@ -5,11 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
-    <link rel="stylesheet" href="D:/VisaWorkshop/miniproject2/src/main/resources/css/main.css">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+
+    <link rel="stylesheet" th:href="@{/home.css}"/>
+
+   
 
     <!-- The Stylesheet that is below will override the one on top--> 
 
@@ -17,38 +18,21 @@
 </head>
 <body>
 
-
-
-
-
-
-
-
-  
-        <blockquote>
-            &ldquo;You cannot find peace avoiding life.&rdquo; 
-            &mdash; <footer>Virginia Woolf</footer>
-        </blockquote>
-
-        <div class="container">
-            <blockquote class="quote-box">
-              <p class="quotation-mark">
-                “
-              </p>
-              <p class="quote-text">
-                Don't believe anything that you read on the internet, it may be fake. 
-              </p>
-              <hr>
-              <div class="blog-post-actions">
-                <p class="blog-post-bottom pull-left">
-                  Abraham Lincoln
-                </p>
-                <p class="blog-post-bottom pull-right">
-                  <span class="badge quote-badge">743</span>  ❤
-                </p>
-              </div>
-            </blockquote>
-        </div>  
+    <ol>
+    <div th:each = "quote:${quoteList}"> 
+        <div id="ct">
+          <div class="corner "id="left_top"></div>
+          <div class="corner" id="left_bottom"></div>
+          <div class="corner" id="right_top"></div>
+          <div class="corner" id="right_bottom"></div>
+          <span th:text = "${quote.getAuthor()}"></span>
+          <blockquote>
+            <p>&ldquo;<i th:text = "${quote.getMessage()}"></i>&rdquo;❤</p>
+          </blockquote>
+        </div>
+      </div>
+  </ol>
+    
 
 </body>
 </html>
