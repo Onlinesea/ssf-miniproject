@@ -1,11 +1,14 @@
 package vttp.ssf.motivationquote.miniproject2.redis;
 
+import org.apache.catalina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import vttp.ssf.motivationquote.miniproject2.model.Journal;
 import vttp.ssf.motivationquote.miniproject2.model.Quote;
 
 @Service
@@ -13,38 +16,33 @@ public class RedisService implements RedisRepo {
     
     private static final Logger logger = LoggerFactory.getLogger(RedisService.class);
 
+    @Autowired
+    @Qualifier("Entry")
+    RedisTemplate<String, Journal> redisTemplate;
+
     @Override
-    public int save(final Quote quote){
-        logger.info("quote inside redisservice >>>>>" + quote.getId());
-        logger.info("quote inside redisservice >>>>>" + quote.getMessage());
+    public void save(final Journal journal){
+        redisTemplate.opsForValue().set(journal.getUser(), journal); // the problem is this 
+        //Quote result = (Quote)redisTemplate.opsForValue().get(quote.getId());
 
+    }
 
-        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
-        redisTemplate.opsForValue().set(quote.getId(), (Quote)quote); // the problem is this 
-        logger.info("Something not wrong with this");
+    @Override
+    public Journal findById(String UserId) {
+        logger.info("find mastermind by id> " + UserId);
+        Journal result = (Journal) redisTemplate.opsForValue().get(UserId);
+        return result;
+    }
 
-        Quote result = (Quote)redisTemplate.opsForValue().get(quote.getId());
-        
-        if(result != null){
-            logger.info("result >>>>>>>>>>>>>>>>>> 1 ");
+    @Override
+    public int update(Journal journal) {
+        logger.info("Save mastermind > " + logger);
+        redisTemplate.opsForValue().setIfPresent(journal.getUser(), journal);
+        Journal result = (Journal) redisTemplate.opsForValue().get(journal.getUser());
 
+        //This is to check whether the json is uploaded successfully 
+        if (result != null)
             return 1;
-        }
-        logger.info("result >>>>>>>>>>>>>>>>>> 0 ");
-
-        return 0;
-
-    }
-
-    @Override
-    public Quote findById(String UserId) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public int update(String UserId) {
-        // TODO Auto-generated method stub
         return 0;
     }
 }

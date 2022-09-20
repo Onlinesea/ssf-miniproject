@@ -6,10 +6,20 @@ body{background:#1D1F20;}
 span{
   background:#1D1F20;
   color:#f1c40f;
-  padding:0 10px;
-  font-size:20px;
   position:relative; 
-  top:-28px;
+  
+}
+h1{
+      background:#1D1F20;
+      color:#f1c40f;
+      position:relative; 
+  
+}
+h2{
+  background:#1D1F20;
+  color:#f1c40f;
+  position:relative; 
+
 }
 .corner{height:30px;
   width:30px;

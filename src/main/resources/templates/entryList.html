@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+
+    <link rel="stylesheet" th:href="@{/entryList.css}"/>
+
+   
+
+    <!-- The Stylesheet that is below will override the one on top--> 
+
+    <title>Your Journal</title>
+</head>
+<body>
+  <h1>Welcome <span th:text="${journalLoad.user}"></span></h1>
+  <p><a href="/login" class="btn btn-info btn-lg">Log out
+  </a></p>
+  <form 
+  action = "#"
+  th:action = "@{/motivationQuotes}"
+  th:object = "${journalLoad}"
+  method = "get">
+
+  <input type="hidden" name= user th:value="${journalLoad.user}"/>
+  <button type = submit> Motivation Quotes </button>
+  
+
+  </form>
+
+  <h2><span>Your Journal Entries</span></h2>
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Feelings</th>
+        <th scope="col"> </th>
+        <th scope="col"> </th>
+        <th scope="col"> </th>
+
+        <th scope="col">Thoughts</th>
+        <th scope="col"> </th>
+        <th scope="col"> </th>
+        <th scope="col"> </th>
+
+        <th scope="col">Quote</th>
+      </tr>
+    </thead>
+   
+      <tbody>
+      <ol>
+    <div th:each = "entry:${entryList}"> 
+      
+          <tr>
+            <th scope="row" th:text = "${entry.getDate()}"></th>
+            <td th:text = "${entry.getFeelings()}"></td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+
+
+            <td th:text = "${entry.getThoughts()}"></td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+
+            <td th:text = "${entry.getMessage()}"></td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+
+          </tr>
+        </tbody>
+      </table>
+        
+        </div>
+  </ol>
+
+
+</body>
+</html>

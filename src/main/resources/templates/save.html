@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+
+    <link rel="stylesheet" th:href="@{/entry.css}"/>
+    <title>Entry Saved</title>
+</head>
+<h1> Welcome: </h1> <h1 th:text="${form.user}"></h1>
+<p><a href="/login" class="btn btn-info btn-lg">Log out
+</a></p>
+     
+
+<h2><span>Saved Entry </span></h2>
+<body th:object = "${form}">
+    <h1>Your Entry Information</h1>
+
+
+    <p>
+        Date:
+    </p>
+    <p
+        th:text = "*{date}">
+    </p>
+
+    <p>
+        Thoughts:
+    </p>
+    <p
+        th:text = "*{thoughts}">
+    </p>
+    <p>
+        Feelings:
+    </p>
+    <p
+        th:text = "*{feelings}">
+    </p>
+
+    <p>
+        Quote:
+    </p>
+    <p
+        th:text = "*{message}">
+    </p>
+    <p>
+        Author:
+    </p>
+    <p
+        th:text = "*{author}">
+    </p>
+    
+
+    
+    
+
+</body>
+</html>

@@ -18,7 +18,9 @@ import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+import vttp.ssf.motivationquote.miniproject2.model.Journal;
 import vttp.ssf.motivationquote.miniproject2.model.Quote;
+import vttp.ssf.motivationquote.miniproject2.service.QuoteService;
 
 @Configuration
 public class RedisConfig {
@@ -32,36 +34,45 @@ public class RedisConfig {
     private Optional<Integer> redisPort;
     
     @Value("${spring.redis.password}")
-    private String redisPasswrod;
+    private String redisPassword;
 
     @Value("${spring.redis.database}")
     private String redisDatabse;
 
-    @Bean(name= "Quote")
+    @Bean(name= "Entry")
     @Scope("singleton")
-    public RedisTemplate<String, Object> redisTemplate(){
-        final RedisStandaloneConfiguration config = new RedisStandaloneConfiguration(); 
+    public RedisTemplate<String, Journal> redisTemplate() {
+        final RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
         config.setHostName(redisHost);
         config.setPort(redisPort.get());
-        config.setPassword(redisPasswrod);
+        config.setPassword(redisPassword);
+        
 
+        Jackson2JsonRedisSerializer jackson2JsonJsonSerializer = new Jackson2JsonRedisSerializer(Journal.class);
+
+        //Building the configuration for jedisClient 
         final JedisClientConfiguration jedisClient = JedisClientConfiguration.builder().build();
+
+        //Instancing a new connection factory that will then be used in the template 
         final JedisConnectionFactory jedisFac = new JedisConnectionFactory(config, jedisClient);
 
+        //To preload the properties ?
         jedisFac.afterPropertiesSet();
-        logger.info("redis host and port >" + redisHost + redisPort);
+        logger.info("redis host port > {redisHost} {redisPort}", redisHost, redisPort);
 
-        RedisTemplate<String,Object> template = new RedisTemplate<>();
+        //Instancing the redistemplate that will be used in the later time
+        RedisTemplate<String, Journal> template = new RedisTemplate<String, Journal>();
+ 
+        //Set up the connectionFactory and keySerializer with the template
         template.setConnectionFactory(jedisFac);
-        template.setKeySerializer(new StringRedisSerializer() );
+        template.setKeySerializer(new StringRedisSerializer());
 
-        //With the new serializer, you do not need to provide type information when deserializing
-        //but the disadvantage is need to implement the Serializable interface and it havve a large serialized result
-        //about five times the JSON format 
-        RedisSerializer<Object> serializer = new JdkSerializationRedisSerializer(getClass().getClassLoader());
-        template.setValueSerializer(serializer);
-
-        logger.info("RedisTemplate set up");
+        //what is the difference between this serializer and RedisSerializer<Object>Serializer 
+        //since both are serializer for setValueSerializer ?
+        //this serializer will require us to specify which kind of serializer that is required
+        template.setValueSerializer(jackson2JsonJsonSerializer);
+        template.setHashKeySerializer(template.getKeySerializer());
+        template.setHashValueSerializer(template.getValueSerializer());
         return template;
     }
 }

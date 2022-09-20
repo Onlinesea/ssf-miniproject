@@ -1,5 +1,6 @@
 package vttp.ssf.motivationquote.miniproject2.service;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +21,7 @@ public class QuoteService {
     
     private static String URL = "https://zenquotes.io/api/quotes";
 
-    public Optional<List<Quote>> getQuote (){
+    public List<Quote> getQuote (){
         
         RestTemplate template = new RestTemplate();
         ResponseEntity<String> resp = null;
@@ -36,19 +37,18 @@ public class QuoteService {
             logger.info("resp received******************************");
             //logger.info(resp.getBody());
 
-
             quoteList= Quote.createList(resp.getBody());
 
-            
-
-            return Optional.of(quoteList);
-            
+            return quoteList;
+          
         }catch(Exception e){
             logger.error(e.getMessage());
             e.printStackTrace();
         }
 
-        return Optional.empty();
+         quoteList= new LinkedList<>();
+         
+        return quoteList;
     }
 
 }

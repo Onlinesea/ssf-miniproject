@@ -10,6 +10,9 @@ import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
@@ -17,28 +20,17 @@ import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
 import vttp.ssf.motivationquote.miniproject2.redis.RedisService;
 
+@Component
 
 public class Quote implements Serializable {
     private static final Logger logger = LoggerFactory.getLogger(Quote.class);
 
-    private String id;
+    private String user;
     private String message;
     private String author;
     private String thoughts;
     private String date;  
     private String feelings;
-
-    public Quote(){
-        this.id = this.generateId(8);
-    }
-    private synchronized String generateId(int numchars) {
-        Random r = new Random();
-        StringBuilder strBuilder = new StringBuilder();
-        while (strBuilder.length() < numchars) {
-            strBuilder.append(Integer.toHexString(r.nextInt()));
-        }
-        return strBuilder.toString().substring(0, numchars);
-    }
 
     public static List createList(String json) throws IOException{
 
@@ -72,7 +64,7 @@ public class Quote implements Serializable {
         String author = v.getString("a");
         quote.setAuthor(author);   
 
-        logger.info("quote created******************************"); //Quote created is okay 
+        //logger.info("quote created******************************"); //Quote created is okay 
 
         return quote;
     }
@@ -116,13 +108,23 @@ public class Quote implements Serializable {
     public void setFeelings(String feelings) {
         this.feelings = feelings;
     }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    /*
     public String getId() {
         return id;
     }
     public void setId(String id) {
         this.id = id;
     }
-
+ */
 
     
 }
