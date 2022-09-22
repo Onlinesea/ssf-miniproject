@@ -32,7 +32,7 @@ public class QuoteController {
     @Autowired
     private AccountService accSvc;
 
-    @GetMapping("/login")
+    @GetMapping("/")
     public String loginPage(Model model){
         model.addAttribute("journal", new Journal());
 
@@ -50,8 +50,8 @@ public class QuoteController {
         logger.info(journalLoad.getUser());
         //logger.info(journalLoad.getEntryList().get(0).getMessage());
         model.addAttribute("journalLoad", journalLoad);
-        if(journal.getEntryList() != null)
-        model.addAttribute("entryList", journal.getEntryList().toArray());
+        if(journalLoad.getEntryList() != null)
+        model.addAttribute("entryList", journalLoad.getEntryList().toArray());
         
         return "entryList";
     }
@@ -61,7 +61,7 @@ public class QuoteController {
     public String getQuotes(Model model, String user){
         
         List<Quote> quoteList = quoteSvc.getQuote();
-        Quote quote = quoteList.get(1);
+        //Quote quote = quoteList.get(1);
         //logger.info("Movitation Quote selected >>>>>" + quote.getMessage());
         //logger.info("Movitation Author selected >>>>>" + quote.getAuthor());
         //logger.info("Movitation ID selected >>>>>" + quote.getId());
@@ -81,10 +81,10 @@ public class QuoteController {
     @GetMapping("/entry")
     public String entry(Model model, String user, String message, String author){
 
-        logger.info("Movitation Quote selected >>>>>" + message);
-        logger.info("Movitation Author selected >>>>>" + author);
-        logger.info("User inside entry >>>>>" + user);
-        Quote newQuote = new Quote();       
+        //logger.info("Movitation Quote selected >>>>>" + message);
+        //logger.info("Movitation Author selected >>>>>" + author);
+        //logger.info("User inside entry >>>>>" + user);
+        //Quote newQuote = new Quote();       
         Journal journalLoad = redisSvc.findById(user);
         journalLoad.currentEntry.setUser(user);
         journalLoad.currentEntry.setMessage(message); 
@@ -93,8 +93,6 @@ public class QuoteController {
         model.addAttribute("journal", journalLoad);
         model.addAttribute("currentEntry", journalLoad.getCurrentEntry());
 
-
-        //model.addAttribute("journal", journalLoad);
 
         return "entry";
     }

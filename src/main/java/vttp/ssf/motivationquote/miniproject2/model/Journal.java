@@ -24,7 +24,6 @@ public class Journal implements Serializable {
     public Journal(){
 
     }
-
     public Journal(String User){
         this.User= User; 
     }

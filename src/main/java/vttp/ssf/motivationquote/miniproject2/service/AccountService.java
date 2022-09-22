@@ -37,9 +37,13 @@ public class AccountService {
         Journal loadJournal = redisSvc.findById(User);
         //logger.info("Size of the loaded journal >>>>> " + loadJournal.getEntryList().size() );
         if (loadJournal != null){
+            //logger.info("loadjournal >" + loadJournal );
             return loadJournal;
         }else{
+
         redisSvc.save(journal);
+        //logger.info("journal >" + journal);
+
         return journal;
         }
     }

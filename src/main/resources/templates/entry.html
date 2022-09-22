@@ -7,14 +7,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
 
-    <link rel="stylesheet" th:href="@{/entry.css}"/>
+    <link rel="stylesheet" th:href="@{/general.css}"/>
     <title>Quote</title>
 </head>
 <body>
-    <h1> Welcome: </h1> <h1 th:text="${currentEntry.user}"></h1>
+  <div class="body">
+    
+    <!--<h1> Welcome: </h1> <h1 th:text="${currentEntry.user}"></h1>-->
     
 
-    <h2>Entry</h2>
+    <h1>Journal Entry</h1>
 
     <form 
     action = "#"
@@ -25,12 +27,12 @@
     <input type="hidden" th:field ="*{user}" >
 
     <p>
-        <label for="Date">Date: </label>
+        <label for="Date"><h3>Date:</h3></label>
         <input type="date" id="start"  required name="date" class = "form-control" >
     </p>
 
     <p>        
-        Author:
+        <h3>Author:</h3>
         <textarea
                 name="daily-entry"
                 id="entry"
@@ -40,7 +42,7 @@
 
     </p>
     <p>        
-        Quote: 
+        <h3>Quote:</h3>
         <textarea
                 name="daily-entry"
                 id="entry"
@@ -50,7 +52,7 @@
 
     </p>
          <p>
-        Thoughts:
+        <h3>Thoughts:</h3>
         <textarea
                 name="daily-entry"
                 id="entry"
@@ -58,10 +60,9 @@
                 placeholder="What's on your mind today? 💭"
                 th:field="*{thoughts}"
               ></textarea>
-     <!--<input type ="textarea" placeholder="What's on your mind today?" th:field = "*{thoughts}">-->
     </p>
     <p>
-        Feelings:
+        <h3>How you feel?</h3>
         <textarea
                 name="daily-entry"
                 id="entry"
@@ -75,5 +76,6 @@
         <input type = "submit" value = "Save"/>
     </p>
     </form>
+    </div>
 </body>
 </html>

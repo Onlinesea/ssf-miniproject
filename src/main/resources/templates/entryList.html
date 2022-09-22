@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
 
-    <link rel="stylesheet" th:href="@{/entryList.css}"/>
+    <link rel="stylesheet" th:href="@{/general.css}"/>
 
    
 
@@ -17,8 +17,9 @@
     <title>Your Journal</title>
 </head>
 <body>
+  <div class="body">
   <h1>Welcome <span th:text="${journalLoad.user}"></span></h1>
-  <p><a href="/login" class="btn btn-info btn-lg">Log out
+  <p><a href="/" class="btn btn-outline-light btn-lg px-5">Log out
   </a></p>
   <form 
   action = "#"
@@ -27,11 +28,11 @@
   method = "get">
 
   <input type="hidden" name= user th:value="${journalLoad.user}"/>
-  <button type = submit> Motivation Quotes </button>
+  <button type = submit class="btn btn-outline-light btn-lg px-5"> Motivation Quotes </button>
   
 
   </form>
-
+</div>
   <h2><span>Your Journal Entries</span></h2>
   <table class="table table-dark">
     <thead>

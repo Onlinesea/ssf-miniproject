@@ -6,19 +6,15 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
-import vttp.ssf.motivationquote.miniproject2.redis.RedisService;
 
 @Component
 
@@ -38,6 +34,7 @@ public class Quote implements Serializable {
 
         List<Quote> quoteList = new LinkedList<>();
 
+        //Creating a List of Quote from the Json file received from the api
         try(InputStream is = new ByteArrayInputStream(json.getBytes())){
             JsonReader r = Json.createReader(is);
             JsonArray o = r.readArray();

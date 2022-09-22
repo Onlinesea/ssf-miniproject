@@ -29,8 +29,9 @@ public class RedisService implements RedisRepo {
 
     @Override
     public Journal findById(String UserId) {
-        logger.info("find mastermind by id> " + UserId);
+        logger.info("find journal by id> " + UserId);
         Journal result = (Journal) redisTemplate.opsForValue().get(UserId);
+        logger.info("journal return" + result);
         return result;
     }
 
